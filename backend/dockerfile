@@ -1,0 +1,14 @@
+# Compile stage
+FROM golang:1.27.1-alpine3.24 AS builder
+WORKDIR /app
+COPY go.mod ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o /app/bin/api ./cmd
+
+# Execution stage
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /app/bin/api .
+EXPOSE 8080
+CMD ["./api"]
