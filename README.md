@@ -175,7 +175,7 @@ go test -v -cover ./...
 
 2. **Generar el perfil binario de cobertura:**
 ```bash
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 
 ```
 
@@ -190,6 +190,11 @@ go tool cover -func=coverage.out
 go tool cover -html=coverage.out
 
 ```
+
+El proyecto cuenta con un **100% de cobertura** en la capa de casos de uso.
+
+![Reporte en Terminal](docs/coverage-terminal.png)
+![Reporte HTML](docs/coverage-html.png)
 
 ---
 
@@ -416,7 +421,7 @@ go test -v -cover ./...
 
 
 ```bash
-go test -coverprofile=coverage.out ./...
+go test -coverprofile coverage.out ./...
 
 ```
 
@@ -435,3 +440,8 @@ go tool cover -func=coverage.out
 go tool cover -html=coverage.out
 
 ```
+
+The project has achieved **100% test coverage** in the use case layer.
+
+![Reporte en Terminal](docs/coverage-terminal.png)
+![Reporte HTML](docs/coverage-html.png)
