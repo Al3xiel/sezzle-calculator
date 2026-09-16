@@ -1,21 +1,20 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	httpdelivery "github.com/Al3xiel/sezzle-calculator/backend/internal/infrastructure"
+	"github.com/Al3xiel/sezzle-calculator/backend/internal/usecase"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	port := ":8080"
-	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status":"ok"}`))
-	})
+	r := gin.Default()
 
-	fmt.Printf("Servidor backend corriendo en http://localhost%s\n", port)
-	if err := http.ListenAndServe(port, nil); err != nil {
-		log.Fatalf("Error iniciando el servidor: %s\n", err)
-	}
+	// 1. Inicializar capas
+	calcUsecase := usecase.NewCalculatorUsecase()
+
+	// 2. Registrar rutas y handlers
+	httpdelivery.NewCalculatorHandler(r, calcUsecase)
+
+	// 3. Levantar servidor
+	r.Run(":8080")
 }
